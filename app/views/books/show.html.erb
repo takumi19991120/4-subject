@@ -2,22 +2,22 @@
   <%= flash[:notice] %>
 </div>
 
-<%= render 'list'%>
+<%= render 'users/user' , {user: @user, book: @book, books: @books} %>
 
-<div class='col-lg-8'>
+<div class='col-md-8 offset-md-1'>
 <h2>Book detail</h2>
  <table class='table table-hover table-inverse'>
   <tr>
    <td><%= image_tag @books.user.get_profile_image(100,100) %><br>
-       <%= link_to @books.user.name, new_book_path %></td>
+       <%= link_to @books.user.name, user_path(@books.user_id) %></td>
    <td><%= link_to @books.title, book_path %></td>
    <td><%= @books.body %></td>
-   
+
   <% if @books.user == current_user %>
     <td><%= link_to "Edit", edit_book_path, class: "btn btn-sm btn-success" %></td>
     <td><%= link_to "Destroy", book_path(@books.id), class: "btn btn-sm btn-danger destroy", method: :delete, "data-confirm" => "本当に消しますか？" %></td>
   <% end %>
-  </tr> 
+  </tr>
 </table>
    </div>
   </div>

@@ -1,7 +1,7 @@
-<% if @book.errors.any? %>
-  <%= @book.errors.count %>件のエラーが発生しました
+<% if book.errors.any? %>
+  <%= book.errors.count %>件のエラーが発生しました
   <ul>
-    <% @book.errors.full_messages.each do |message| %>
+    <% book.errors.full_messages.each do |message| %>
       <li><%= message %></li>
     <% end %>
   </ul>
@@ -10,23 +10,37 @@
 <div class="container px-5 px-sm-0">
  <div class="row">
   <div class="col-md-3">
-    
+
 <h2>User info</h2>
 
-<div>
-  <%= image_tag @user.get_profile_image(100,100) %>
-  <p>name:<%= @user.name %><p>
-  <p>introduction:<%= @user.introduction %><p>
-  <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
+<table class='table'>
+  <tr><%= image_tag books.user.get_profile_image(100,100) %></tr>
+  <tr>
+  <th>name</th>
+  <th><%= books.user.name %><th>
+  </tr>
+  
+  <tr>
+  <th>introduction<th>
+  </th><%= books.user.introduction %><th>
+  </tr>
+</table>
+  
+<div class='row'>
+  <%= link_to edit_user_path(books.user), class: "btn btn-outline-secondary btn-block" do %>  
+   <i class="fas fa-user-cog"></i>
+  <% end %>
 </div>
+  
+<h2>New book</h2>
 
-<h1>New book</h1>
-  <%= form_with model: @book do |f| %>
-<h4>Title</h4>
+  <%= form_with model: book do |f| %>
+  <p>Title</p>
   <%= f.text_field :title %>
-<h4>Opinion</h4>
+  <p>Opinion</p>
   <%= f.text_area :body %>
-<div> 
-<%= f.submit 'Create Book' %>
-</div> 
-<% end %>
+<div>
+  <%= f.submit 'Create Book',class: "btn btn-success" %>
+</div>  
+  <% end %>
+ </div>
